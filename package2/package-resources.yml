@@ -1,0 +1,48 @@
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  name: package2.tanzu.vmware.com.0.0.1
+spec:
+  refName: package2.tanzu.vmware.com
+  releasedAt: 2023-06-08T19:21:04Z
+  template:
+    spec:
+      deploy:
+      - kapp: {}
+      fetch:
+      - git: {}
+      template:
+      - ytt:
+          paths:
+          - config
+      - kbld: {}
+  version: 0.0.1
+
+---
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: PackageMetadata
+metadata:
+  name: package2.tanzu.vmware.com
+spec:
+  displayName: package2
+  longDescription: package2.tanzu.vmware.com
+  shortDescription: package2.tanzu.vmware.com
+
+---
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageInstall
+metadata:
+  annotations:
+    kctrl.carvel.dev/local-fetch-0: .
+  creationTimestamp: null
+  name: package1
+spec:
+  packageRef:
+    refName: package2.tanzu.vmware.com
+    versionSelection:
+      constraints: 0.0.1
+  serviceAccountName: package2-sa
+status:
+  conditions: null
+  friendlyDescription: ""
+  observedGeneration: 0
